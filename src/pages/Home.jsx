@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import getAllCountries from '../services/getAllCountries';
-import Card from './Card';
-import SearchBar from './SearchBar';
+import CountryCard from '../components/CountryCard';
+import SearchBar from '../components/SearchBar';
 
 export default class Home extends Component {
   constructor(props) {
@@ -22,7 +22,7 @@ export default class Home extends Component {
 
   handleCountrySet(newCountries) {
     this.setState({
-      countries
+      countries: newCountries
     });
   }
 
@@ -35,7 +35,7 @@ export default class Home extends Component {
           <div className="row">
             {countries.map((country) => (
               <div key={ country.name.common } className='col-3'>
-                <Card
+                <CountryCard
                   name={ country.name.common }
                   imgUrl={ country.flags.png }
                   capital={ country.capital }
