@@ -1,4 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
+import getCountriesByName from '../services/getCountriesByName';
 
 class SearchBar extends React.Component {
   constructor() {
@@ -9,17 +12,25 @@ class SearchBar extends React.Component {
     };
 
     this.handleChange = this.handleChange.bind(this);
-    this.getCountriesByName = this.getCountriesByName.bind(this);
+    this.setCountriesByName = this.setCountriesByName.bind(this);
   }
 
   handleChange({ target: { name, value } }) {
-    this.setState({ [name]: value });
+    this.setState({ [name]: value }, this.setCountriesByName);
   }
 
-  async getCountriesByName() {
+  async setCountriesByName() {
     const { setCountries } = this.props;
     const { query } = this.state;
-    const countries = await this.getCountriesByName(query);
+
+    const NOT_FOUND_STATUS_CODE = 404;
+    const countries = await getCountriesByName(query);
+
+    if (countries.status === NOT_FOUND_STATUS_CODE) {
+      setCountries([]);
+      return;
+    }
+
     setCountries(countries);
   }
 
@@ -38,11 +49,6 @@ class SearchBar extends React.Component {
             onChange={ this.handleChange }
           />
         </label>
-        <button
-          type="submit"
-        >
-          Buscar
-        </button>
       </form>
     );
   }
