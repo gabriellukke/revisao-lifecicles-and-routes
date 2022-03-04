@@ -24,8 +24,6 @@ class Details extends React.Component {
   render() {
     const { country } = this.state;
 
-    const [currency] = Object.keys(country.currencies) || 'Press F to Pay respect';
-
     return !country ? (
       'Carregando...'
     ) : (
@@ -37,7 +35,7 @@ class Details extends React.Component {
           <li>{`Capital: ${country.capital[0]}`}</li>
           <li>{`Population: ${country.population}`}</li>
           <li>{`Currency: ${
-            country.currencies[currency].name
+            country.currencies[Object.keys(country.currencies)].name
           }`}
           </li>
         </ul>

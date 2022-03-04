@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
 import getAllCountries from '../services/getAllCountries';
 import CountryCard from '../components/CountryCard';
 import SearchBar from '../components/SearchBar';
@@ -28,6 +30,7 @@ export default class Home extends Component {
 
   render() {
     const { countries } = this.state;
+
     return (
       <div>
         <SearchBar setCountries={ this.handleCountrySet } />
@@ -39,6 +42,7 @@ export default class Home extends Component {
                   name={ country.name.common }
                   imgUrl={ country.flags.png }
                   capital={ country.capital }
+                  code={ country.cca3 }
                 />
               </div>
             ))}
