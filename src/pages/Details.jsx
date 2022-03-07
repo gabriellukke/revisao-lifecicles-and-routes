@@ -35,7 +35,7 @@ class Details extends React.Component {
           <li>{`Capital: ${country.capital[0]}`}</li>
           <li>{`Population: ${country.population}`}</li>
           <li>{`Currency: ${
-            country.currencies[Object.keys(country.currencies)].name
+            country.currencies[Object.keys(country.currencies)[0]].name
           }`}
           </li>
         </ul>

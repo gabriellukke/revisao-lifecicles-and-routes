@@ -13,10 +13,8 @@ class App extends React.Component {
           <Route path="/" exact>
             <Home />
           </Route>
-          <Route route="country/:code" exact>
-            <Details />
-          </Route>
-          <Route route="*">
+          <Route path="/country/:code" component={ Details } exact />
+          <Route path="*">
             <NotFound />
           </Route>
         </Switch>
